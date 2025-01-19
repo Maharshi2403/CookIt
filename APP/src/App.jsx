@@ -1,4 +1,7 @@
 import "./App.css";
+import { Link } from "react-router-dom";
+import emailIcon from "./resources/Email.png";
+import lockIcon from "./resources/Lock.png";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -52,36 +55,57 @@ function App() {
       console.error("Error during sign-up:", error);
     }
   }
-  return (
-    <form className="form" action="" method="POST">
-      <h3 className="header">
-        <span>Authentication</span>
-      </h3>
-      <span className="auth">Username</span>
-      <input
-        className="textInput"
-        name="username"
-        type="text"
-        onChange={(e) => setUserName(e.target.value)}
-        required
-      />
-      <span className="auth">Password</span>
-      <input
-        className="textInput"
-        name="password"
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <div className="btn">
-        <button className="signin" type="button" onClick={handleSignIn}>
-          Sign in
-        </button>
-        <button className="signup" type="button" onClick={handleSignUp}>
-          Sign up
-        </button>
+  return (<>
+    
+
+    <div className="login-container">
+      {/* Navigation buttons */}
+      <div className="nav-buttons">
+        <Link to="/signup">Sign Up</Link>
+        <Link to="/login">Log In</Link>
       </div>
-    </form>
+
+      {/* Login Form */}
+      <div className="login-wrapper">
+        <h1>Log In</h1>
+        <form action="" method="POST">
+          {/* Email Field */}
+          <div className="input-container">
+            <img src={emailIcon} className="input-icon" />
+            <input
+              type="email"
+              placeholder="Email"
+              name="username"
+              onChange={(e) => setUserName(e.target.value)}
+              required
+            />
+          </div>
+
+          {/* Password Field */}
+          <div className="input-container">
+            <img src={lockIcon} className="input-icon" />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          {/* Login Button */}
+          <button type="submit" onClick={handleSignIn}>
+            Log In
+          </button>
+        </form>
+
+        {/* Forgot Password */}
+        <p>
+          <a href="/forgot-password">Forgot Password?</a>
+        </p>
+      </div>
+    </div>
+    </>
   );
 }
 
