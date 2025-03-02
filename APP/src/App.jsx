@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 let token =
   "eyJhbGciOiJIUzI1NiJ9.e30.Picf4CVBhMiIfxch0azadAqgQO4yDXBrRWORPGVHkYc";
 function App() {
-  
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -28,8 +27,9 @@ function App() {
       const data = await response.json();
       token = data.token;
       console.log("Sign-in response:", data);
-      
-      navigate("/Dashboard/homePage");
+
+      navigate("/Dashboard");
+      console.log("control reaches here!!");
     } catch (error) {
       console.error("Error during sign-in:", error);
     }
@@ -50,64 +50,60 @@ function App() {
       const data = await response.json();
       token = data.token;
       console.log("Sign-up response:", data);
+      navigate("/Dashboard");
       // Handle success or error based on response
     } catch (error) {
       console.error("Error during sign-up:", error);
     }
   }
-  return (<>
-    
+  return (
+    <>
+      <div className="login-container">
+        {/* Login Form */}
+        <div className="login-wrapper">
+          <h1>Log In</h1>
+          <form action="" method="POST">
+            {/* Email Field */}
+            <div className="input-container">
+              <img src={emailIcon} className="input-icon" />
+              <input
+                type="email"
+                placeholder="Email"
+                name="username"
+                onChange={(e) => setUserName(e.target.value)}
+                required
+              />
+            </div>
 
-    <div className="login-container">
-      {/* Navigation buttons */}
-      <div className="nav-buttons">
-        <Link to="/signup">Sign Up</Link>
-        <Link to="/login">Log In</Link>
+            {/* Password Field */}
+            <div className="input-container">
+              <img src={lockIcon} className="input-icon" />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            {/* Login Button */}
+            <button type="button" onClick={handleSignIn}>
+              Log In
+            </button>
+            <button type="button" onClick={handleSignUp}>
+              Sign Up
+            </button>
+          </form>
+
+          {/* Forgot Password */}
+          <p>
+            <a href="/forgot-password">Forgot Password?</a>
+          </p>
+        </div>
       </div>
-
-      {/* Login Form */}
-      <div className="login-wrapper">
-        <h1>Log In</h1>
-        <form action="" method="POST">
-          {/* Email Field */}
-          <div className="input-container">
-            <img src={emailIcon} className="input-icon" />
-            <input
-              type="email"
-              placeholder="Email"
-              name="username"
-              onChange={(e) => setUserName(e.target.value)}
-              required
-            />
-          </div>
-
-          {/* Password Field */}
-          <div className="input-container">
-            <img src={lockIcon} className="input-icon" />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          {/* Login Button */}
-          <button type="submit" onClick={handleSignIn}>
-            Log In
-          </button>
-        </form>
-
-        {/* Forgot Password */}
-        <p>
-          <a href="/forgot-password">Forgot Password?</a>
-        </p>
-      </div>
-    </div>
     </>
   );
 }
 
 export default App;
-

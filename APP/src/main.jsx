@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/Dashboard/homePage",
+    path: "/Dashboard",
     element: <Dashboard />,
   },
 ]);
